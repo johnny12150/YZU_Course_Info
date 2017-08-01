@@ -1,0 +1,57 @@
+﻿<div id="app">
+    <p id="course" hidden>@ViewBag.course</p>
+    <p id="mId" hidden>@ViewBag.mId</p>
+    <div class="container" style="padding-top:30px;">
+        <div id="courseInfo">
+            <div class="msgDiv" v-if="cInfo">
+                <div class="msgDiv-info">
+                    <h3>課程資訊</h3>
+                    <hr />
+                    <ul>
+                        <li><b>課程編號：</b>{{ cInfo[0].cId }}</li>
+                        <li><b>課程名稱：</b> {{ cInfo[0].cName }}</li>
+                        <li><b>開課單位：</b>{{ cInfo[0].department }}</li>
+                        <li><b>課程時間與地點：</b>{{ cInfo[0].CourseRoom[0].cRoom }}</li>
+                        <li><b>學分數：</b> {{ cInfo[0].credit }}</li>
+                        <li><b>授課老師：</b>{{ cInfo[0].Teacher.tName }}</li>
+                        <li><b>老師信箱：</b><a v-bind:href="'mailto:' + cInfo[0].Teacher.tId + '@("@")saturn.yzu.edu.tw'">{{ cInfo[0].Teacher.tId }}@@saturn.yzu.edu.tw</a></li>
+                        <li><b>元智課程查詢系統連結：</b><a v-bind:href="linkToPortal">點我前往</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h1 v-else>您尚未選擇課程</h1>
+        </div>
+        <br />
+        <div id="commentBlock" v-if="cId">
+            <div id="courseComments">
+                <h2>討論區</h2>
+                <hr />
+                <div id="com" v-if="comments">
+                    <div class="media" v-for="(comment, index) in comments">
+                        <div class="media-right" style="padding-right: 15px;">
+                            <img class="media-object" :src="getImgUrl(comment.comSeq)" style="width:72px" alt="Member Head" />
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                {{ comment.Member.mNickname }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ index+1 }} 樓
+                                &nbsp;&nbsp;&nbsp;<small><i>-- {{ comment.comTime }}</i></small>
+                            </h4>
+                            <p style="padding-top: 5px;">{{ comment.comContent }}</p>
+                            <a class="push-right" href="#" v-on:click="delComment(comment.comSeq)">刪除</a>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                <h4 v-else>沒有留言<br />成為第一個留言的人吧~</h4>
+            </div>
+            <div class="form-group" id="addComment">
+                <label for="comment">@ViewBag.nickname，來留言吧</label>
+                <textarea class="form-control" rows="5" v-model="post.comContent"></textarea>
+                <br />
+                <button class="btn btn-primary" v-on:click="addComment">送出</button>
+            </div>
+        </div>
+        <p v-else></p>
+    </div>
+</div>
+@Scripts.Render("~/Scripts/cDetails.js")

@@ -1,0 +1,49 @@
+﻿@using yzu_course_info_API.ViewModels
+@model LoginViewModel
+
+<h2>登入</h2>
+@*如果↓表單的ReturnUrl沒給的話，就沒辦法導向使用者原先要求的頁面*@
+@using (Html.BeginForm("Login", "Member", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>登入論壇</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.mId, "帳號", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.mId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.mId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.mPwd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.mPwd, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.mPwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="登入" class="btn btn-default" />
+            </div>
+        </div>
+        <br />
+        @Html.ValidationSummary(null, new { @class = "text-danger" })
+    </div>
+}
+<div>
+    沒有帳號嗎？@Html.ActionLink("註冊", "Register")
+</div>
+
+@*
+    參考資料：
+    http://demo.tc/post/534
+    https://dotblogs.com.tw/shadow/archive/2014/03/01/144191.aspx
+    http://www.debugease.com/aspdotnet/1993308.html
+    https://dotblogs.com.tw/magic/2011/12/31/64050
+*@

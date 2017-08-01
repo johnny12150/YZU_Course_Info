@@ -1,0 +1,20 @@
+﻿@if (Request.IsAuthenticated)
+{
+    FormsIdentity id = (FormsIdentity)User.Identity;
+    FormsAuthenticationTicket ticket = id.Ticket;
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("你好啊 " + ticket.Name + " ！你知道登入很難做嗎？", "Index", "Member")
+        </li>
+        <li><a href="@Url.Action("Logout", "Member")">登出</a></li>
+    </ul>
+}
+else
+{
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("註冊", "Register", "Member")</li>
+    <li>@Html.ActionLink("登入", "Login", "Member")</li>
+</ul>
+}
+
+

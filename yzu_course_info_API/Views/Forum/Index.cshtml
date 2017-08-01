@@ -1,0 +1,47 @@
+﻿<div id="app">
+    <div class="col-sm-12 col-lg-12 col-md-12">
+        <div class="col-lg-12 col-md-12 col-sm-12"><h2>過濾課程</h2></div>
+        <div class="col-md-4">
+            資料數量：<input class="form-control" type="number" min="0" v-model="numsOfRows" />
+        </div>
+        <div class="col-md-4">
+            課號：<input class="form-control" type="text" v-model="cIdKey" />
+        </div>
+        <div class="col-md-4">
+            課程名稱：<input class="form-control" type="text" v-model="cNameKey" />
+        </div>
+        <div class="col-md-4">
+            授課老師：<input class="form-control" type="text" v-model="tNameKey" />
+        </div>
+        <!--<button class="btn btn-default" v-on:click="findCourses">查詢</button>-->
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12"><h2>課程清單</h2></div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <table class="table" v-if="courses">
+                <thead>
+                    <tr>
+                        <th v-on:click="order('cId')">課號</th>
+                        <th v-on:click="order('cName')">課程名稱</th>
+                        <th v-on:click="order('department')">開課單位</th>
+                        <th v-on:click="order('credit')">學分數</th>
+                        <th v-on:click="order('Teacher/tName')">授課老師</th>
+                        <th>詳細資訊</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="course in courses">
+                        <td>{{ course.cId }}</td>
+                        <td>{{ course.cName }}</td>
+                        <td>{{ course.department }}</td>
+                        <td>{{ course.credit }}</td>
+                        <td>{{ course.Teacher.tName }}</td>
+                        <td><a v-bind:href="'/Forum/CourseDetails?cid='+ course.cId">課程資訊</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4 v-else>無資料</h4>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/Scripts/forum.js")

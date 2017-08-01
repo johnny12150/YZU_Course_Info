@@ -1,0 +1,59 @@
+﻿@using yzu_course_info_API.ViewModels
+@model MemberViewModel
+<h2>會員中心</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>修改會員資料</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.mId, new { Value = User.Identity.Name })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.mPwd, "密碼", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.mPwd, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.mPwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPwd, "確認密碼", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPwd, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmPwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.mNickname, "暱稱", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.mNickname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.mNickname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存變更" class="btn btn-default" />
+            </div>
+        </div>
+        <br />
+        @Html.ValidationSummary(null, new { @class = "text-danger" })
+    </div>
+}
+
+<div>
+    @Html.ActionLink("回到論壇", "Index", "Forum", new { area = "" }, null)
+    <div>我只是要<a href="@Url.Action("Logout","Member")">登出</a>而已</div>
+</div>
+
+
+
+
+
+<h2>你的暱稱：@ViewBag.usrNickname</h2>
+<h2>你的帳號：@User.Identity.Name</h2>

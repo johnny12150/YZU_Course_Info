@@ -1,0 +1,69 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.table thead > tr > th {
+    cursor: pointer !important;
+}
+
+.clearfix {
+    overflow: auto;
+    zoom: 1;
+}
+
+.flex {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .flex #body {
+        width: 38vw;
+        text-align: center;
+        border-radius: 9px;
+        box-shadow: 5px 10px 34px -4px rgba(0,0,0,0.4);
+    }
+.msgDiv-info h3 {
+    color: #5bc0de;
+}
+
+.msgDiv-info hr {
+    color: #5bc0de;
+    background-color: #5bc0de;
+    height: 0.5px;
+}
+
+.msgDiv-info b {
+    color: #5bc0de;
+}
+
+.msgDiv {
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid #5bc0de;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+    .msgDiv h3 {
+        font-weight: 500;
+    }
+
+    .msgDiv b {
+        font-weight: 900;
+        padding-left: 2%;
+    }
